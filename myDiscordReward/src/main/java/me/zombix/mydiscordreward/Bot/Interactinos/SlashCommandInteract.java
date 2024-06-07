@@ -55,7 +55,7 @@ public class SlashCommandInteract extends ListenerAdapter {
             String embedTitle = discordConfig.getString("embed.title");
             String embedDescription = discordConfig.getString("embed.description");
             String embedColorHex = discordConfig.getString("embed.color");
-            if (!embedColorHex.startsWith("#")) { embedColorHex = "#" + embedColorHex; }
+            if (embedColorHex != null) { if (!embedColorHex.startsWith("#")) { embedColorHex = "#" + embedColorHex; } }
             Color color = embedColorHex != null ? Color.decode(embedColorHex) : null;
             String embedFooterText = discordConfig.getString("embed.footer.text");
             String embedFooterLink = discordConfig.getString("embed.footer.link");
