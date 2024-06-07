@@ -1,0 +1,32 @@
+name: myDiscordReward
+version: '${project.version}'
+main: me.zombix.mydiscordreward.MyDiscordReward
+api-version: '1.20'
+authors: [Zombix3000]
+description: Plugin for reward by join discord
+commands:
+  mydiscordreward:
+    description: myDiscordReward plugin command
+    usage: /mydiscordreward <reload/update/addrewarditem/addrewardcommand> (command)
+    aliases:
+      - reload
+      - update
+      - addrewarditem
+      - addrewardcommand
+
+permissions:
+  mydiscordreward.mydiscordreward:
+    description: Allow to use /mydiscordreward command
+    default: true
+  mydiscordreward.reload:
+    description: Allow to use /mydiscordreward reload command
+    default: op
+  mydiscordreward.update:
+    description: Allow to use /mydiscordreward update command
+    default: op
+  mydiscordreward.addrewarditem:
+    description: Allow to use /mydiscordreward addrewarditem command
+    default: op
+  mydiscordreward.addrewardcommand:
+    description: Allow to use /mydiscordreward addrewardcommand (command) command
+    default: op
