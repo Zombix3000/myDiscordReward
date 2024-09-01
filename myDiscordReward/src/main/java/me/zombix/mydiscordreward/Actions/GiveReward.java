@@ -13,15 +13,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
 
 public class GiveReward {
-    private ConfigManager configManager;
-    private JavaPlugin plugin;
+    private static ConfigManager configManager;
+    private static JavaPlugin plugin;
 
     public GiveReward(ConfigManager configManager, JavaPlugin plugin) {
         this.configManager = configManager;
         this.plugin = plugin;
     }
 
-    public void giveReward(String nick) {
+    public static void giveReward(String nick) {
         FileConfiguration mainConfig = configManager.getMainConfig();
 
         List<String> rewardCommands = mainConfig.getStringList("reward.commands");
@@ -35,16 +35,18 @@ public class GiveReward {
 
         Player player = Bukkit.getPlayer(nick);
 
-        for (String key : itemsSection.getKeys(false)) {
-            ConfigurationSection itemSection = itemsSection.getConfigurationSection(key);
-            Material material = Material.getMaterial(itemSection.getString("material"));
-            int amount = itemSection.getInt("amount");
-            ItemStack itemStack = new ItemStack(material, amount);
-            ItemStack itemStackMeta = itemSection.getItemStack("meta");
-            ItemMeta itemMeta = itemStackMeta.getItemMeta();
-            itemStack.setItemMeta(itemMeta);
+        if (itemsSection != null) {
+            for (String key : itemsSection.getKeys(false)) {
+                ConfigurationSection itemSection = itemsSection.getConfigurationSection(key);
+                Material material = Material.getMaterial(itemSection.getString("material"));
+                int amount = itemSection.getInt("amount");
+                ItemStack itemStack = new ItemStack(material, amount);
+                ItemStack itemStackMeta = itemSection.getItemStack("meta");
+                ItemMeta itemMeta = itemStackMeta.getItemMeta();
+                itemStack.setItemMeta(itemMeta);
 
-            player.getInventory().addItem(itemStack);
+                player.getInventory().addItem(itemStack);
+            }
         }
     }
 

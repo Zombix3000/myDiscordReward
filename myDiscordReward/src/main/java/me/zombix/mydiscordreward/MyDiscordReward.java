@@ -1,6 +1,5 @@
 package me.zombix.mydiscordreward;
 
-import me.zombix.mydiscordreward.Actions.GiveReward;
 import me.zombix.mydiscordreward.Bot.Bot;
 import me.zombix.mydiscordreward.Commands.MyDiscordRewardCommand;
 import me.zombix.mydiscordreward.Config.CommandsTabCompleter;
@@ -11,33 +10,18 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class MyDiscordReward extends JavaPlugin {
-    private ConfigManager configManager;
-    private Updates updates;
-    private Bot discordBot;
-    private GiveReward giveReward;
+    private static ConfigManager configManager;
 
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
-        giveReward = new GiveReward(configManager, this);
         configManager.setupConfig();
 
         registerCommands();
-
-        String token = configManager.getMainConfig().getString("bot-token");
-
-        if (!Objects.equals(token, "nope")) {
-            try {
-                discordBot = new Bot(token, configManager, giveReward);
-            } catch (Exception e) {
-                e.printStackTrace();
-                getLogger().severe("There was en error while enabling bot! Please check is token correct.");
-            }
-        } else {
-            getLogger().severe("There was en error while enabling bot! Please sing the bot token in config.yml.");
-        }
+        runBot();
 
         getLogger().info("Plugin myDiscordReward has been enabled!");
 
@@ -49,15 +33,31 @@ public final class MyDiscordReward extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bot.shutdown();
         getLogger().info("Plugin myDiscordReward has been disabled!");
     }
 
     private void registerCommands() {
-        CommandExecutor myDiscordRewardCommand = new MyDiscordRewardCommand(configManager, updates, this);
+        CommandExecutor myDiscordRewardCommand = new MyDiscordRewardCommand(configManager, this);
         TabCompleter commandsTabCompleter = new CommandsTabCompleter();
 
         getCommand("mydiscordreward").setExecutor(myDiscordRewardCommand);
         getCommand("mydiscordreward").setTabCompleter(commandsTabCompleter);
+    }
+
+    public static void runBot() {
+        String token = configManager.getMainConfig().getString("bot-token");
+        Logger logger = configManager.getPlugin().getLogger();
+
+        if (!Objects.equals(token, "nope")) {
+            try {
+                new Bot(token, configManager);
+            } catch (Exception e) {
+                logger.severe("There was en error while enabling bot! Please check is token correct.");
+            }
+        } else {
+            logger.severe("There was en error while enabling bot! Please sing the bot token in config.yml.");
+        }
     }
 
     private void checkForUpdates() {

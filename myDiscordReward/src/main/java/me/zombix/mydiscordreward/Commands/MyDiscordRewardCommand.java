@@ -11,15 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MyDiscordRewardCommand implements CommandExecutor {
     private final ConfigManager configManager;
-    private final Updates updates;
     private final JavaPlugin plugin;
     private final String noPermission;
 
-    public MyDiscordRewardCommand(ConfigManager configManager, Updates updates, JavaPlugin plugin) {
+    public MyDiscordRewardCommand(ConfigManager configManager, JavaPlugin plugin) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
 
         this.configManager = configManager;
-        this.updates = updates;
         this.plugin = plugin;
         this.noPermission = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("no-permission"));
     }
@@ -37,7 +35,7 @@ public class MyDiscordRewardCommand implements CommandExecutor {
                 ReloadCommand reloadCommand = new ReloadCommand(configManager);
                 return reloadCommand.onCommand(sender, command, label, args);
             } else if (subCommand.equalsIgnoreCase("update")) {
-                UpdateCommand updateCommand = new UpdateCommand(configManager, updates, plugin);
+                UpdateCommand updateCommand = new UpdateCommand(configManager, plugin);
                 return updateCommand.onCommand(sender, command, label, args);
             } else if (subCommand.equalsIgnoreCase("addrewarditem")) {
                 AddRewardItemCommand addRewardItemCommand = new AddRewardItemCommand(configManager);

@@ -4,7 +4,7 @@
   <groupId>me.zombix</groupId>
   <artifactId>myDiscordReward</artifactId>
   <name>myDiscordReward</name>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <description>Plugin for reward by join discord</description>
   <build>
     <resources>
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.20.4-R0.1-SNAPSHOT</version>
+      <version>1.16.1-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

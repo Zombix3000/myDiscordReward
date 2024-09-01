@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import static org.bukkit.Bukkit.getLogger;
+
 public class StringSelectInteract extends ListenerAdapter {
     private ConfigManager configManager;
 
@@ -174,6 +176,67 @@ public class StringSelectInteract extends ListenerAdapter {
 
                 event.replyModal(modal).queue();
             }
+        } else if (event.getComponentId().equals("setupBotMenu")) {
+            String selected = event.getValues().get(0);
+
+            if (selected.equals("activity")) {
+                StringSelectMenu.Builder builder = StringSelectMenu.create("setupBotActivity");
+                builder.addOption("Activity Type", "activityType");
+                builder.addOption("Activity Message", "activityMessage");
+                StringSelectMenu menu = builder.build();
+
+                event.reply("Activity setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
+            } else if (selected.equals("status")) {
+                StringSelectMenu.Builder builder = StringSelectMenu.create("setupBotStatus");
+                builder.addOption("Online", "online");
+                builder.addOption("Idle", "idle");
+                builder.addOption("Do Not Disturb", "do not disturb");
+                builder.addOption("Invisible", "invisible");
+                builder.addOption("Offline", "offline");
+                StringSelectMenu menu = builder.build();
+
+                event.reply("Status setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
+            }
+        } else if (event.getComponentId().equals("setupBotStatus")) {
+            String selected = event.getValues().get(0);
+
+            FileConfiguration discordConfig = configManager.getDiscordConfig();
+            discordConfig.set("bot.status", selected);
+            configManager.saveDiscordConfig();
+
+            event.reply("Successfully set bot status to: " + selected).setEphemeral(true).queue();
+        } else if (event.getComponentId().equals("setupBotActivity")) {
+            String selected = event.getValues().get(0);
+
+            if (selected.equals("activityType")) {
+                StringSelectMenu.Builder builder = StringSelectMenu.create("setupBotActivityType");
+                builder.addOption("Playing", "playing");
+                builder.addOption("Streaming", "streaming");
+                builder.addOption("Listening", "listening");
+                builder.addOption("Watching", "watching");
+                StringSelectMenu menu = builder.build();
+
+                event.reply("Activity Type setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
+            } else if (selected.equals("activityMessage")) {
+                TextInput messageInput = TextInput.create("message", "Message", TextInputStyle.PARAGRAPH)
+                        .setPlaceholder("Enter the message text")
+                        .setMinLength(1)
+                        .setMaxLength(128)
+                        .setRequired(true)
+                        .build();
+
+                Modal modal = Modal.create("botSetupMessageModal", "Enter message").addActionRows(ActionRow.of(messageInput)).build();
+
+                event.replyModal(modal).queue();
+            }
+        } else if (event.getComponentId().equals("setupBotActivityType")) {
+            String selected = event.getValues().get(0);
+
+            FileConfiguration discordConfig = configManager.getDiscordConfig();
+            discordConfig.set("bot.activity.type", selected);
+            configManager.saveDiscordConfig();
+
+            event.reply("Successfully set bot activity type to: " + selected).setEphemeral(true).queue();
         }
     }
 

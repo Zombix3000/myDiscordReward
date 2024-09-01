@@ -48,7 +48,14 @@ public class SlashCommandInteract extends ListenerAdapter {
             builder.addOption("Placeholder", "placeholder");
             StringSelectMenu menu = builder.build();
 
-            event.reply("Button Setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
+            event.reply("Modal Setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
+        } else if (event.getName().equals("setup-bot")) {
+            StringSelectMenu.Builder builder = StringSelectMenu.create("setupBotMenu");
+            builder.addOption("Activity", "activity");
+            builder.addOption("Status", "status");
+            StringSelectMenu menu = builder.build();
+
+            event.reply("Bot Setup").setEphemeral(true).addComponents(ActionRow.of(menu)).queue();
         } else if (event.getName().equals("send-embed")) {
             FileConfiguration discordConfig = configManager.getDiscordConfig();
 

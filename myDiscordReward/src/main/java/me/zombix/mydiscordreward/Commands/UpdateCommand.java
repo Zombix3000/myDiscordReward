@@ -11,16 +11,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class UpdateCommand implements CommandExecutor {
     private final JavaPlugin plugin;
-    private final ConfigManager configManager;
-    private final Updates updates;
     private final String noPermission;
 
-    public UpdateCommand(ConfigManager configManager, Updates updates, JavaPlugin plugin) {
+    public UpdateCommand(ConfigManager configManager, JavaPlugin plugin) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
 
         this.plugin = plugin;
-        this.configManager = configManager;
-        this.updates = updates;
         this.noPermission = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("no-permission"));
     }
 

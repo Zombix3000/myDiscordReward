@@ -16,16 +16,14 @@ import java.util.List;
 
 public class ModalInteract extends ListenerAdapter {
     private ConfigManager configManager;
-    private GiveReward giveReward;
     private String getReward;
     private String mustBeOnline;
     private String alreadyGetReward;
 
-    public ModalInteract(ConfigManager configManager, GiveReward giveReward) {
+    public ModalInteract(ConfigManager configManager) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
 
         this.configManager = configManager;
-        this.giveReward = giveReward;
         this.getReward = messagesConfig.getString("successfully-get-reward");
         this.mustBeOnline = messagesConfig.getString("must-be-online");
         this.alreadyGetReward = messagesConfig.getString("already-get-reward");
@@ -141,6 +139,14 @@ public class ModalInteract extends ListenerAdapter {
             configManager.saveDiscordConfig();
 
             event.reply("Successfully set modal placeholder to: " + placeholder).setEphemeral(true).queue();
+        } else if (event.getModalId().equals("botSetupMessageModal")) {
+            String message = event.getValue("message").getAsString();
+
+            FileConfiguration discordConfig = configManager.getDiscordConfig();
+            discordConfig.set("bot.activity.message", message);
+            configManager.saveDiscordConfig();
+
+            event.reply("Successfully set bot activity message to: " + message).setEphemeral(true).queue();
         } else if (event.getModalId().equals("nickModal")) {
             String nick = event.getValue("nick").getAsString();
 
@@ -148,7 +154,7 @@ public class ModalInteract extends ListenerAdapter {
                 Player player = Bukkit.getPlayerExact(nick);
 
                 if (player != null) {
-                    giveReward.giveReward(nick);
+                    GiveReward.giveReward(nick);
 
                     FileConfiguration usersConfig = configManager.getUsersConfig();
 
