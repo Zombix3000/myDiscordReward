@@ -11,8 +11,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ReloadCommand implements CommandExecutor {
     private final ConfigManager configManager;
-    private final String successfullyReloaded;
-    private final String noPermission;
+    private String successfullyReloaded;
+    private String noPermission;
 
     public ReloadCommand(ConfigManager configManager) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
@@ -24,7 +24,7 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.hasPermission("mydiscordreward.reload")) {
+        if (sender.hasPermission("mydiscordreward.admin")) {
             configManager.setupConfig();
             Bot.shutdown();
             MyDiscordReward.runBot();

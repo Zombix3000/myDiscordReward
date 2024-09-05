@@ -190,7 +190,7 @@ public class StringSelectInteract extends ListenerAdapter {
                 StringSelectMenu.Builder builder = StringSelectMenu.create("setupBotStatus");
                 builder.addOption("Online", "online");
                 builder.addOption("Idle", "idle");
-                builder.addOption("Do Not Disturb", "do not disturb");
+                builder.addOption("Do Not Disturb", "do_not_disturb");
                 builder.addOption("Invisible", "invisible");
                 builder.addOption("Offline", "offline");
                 StringSelectMenu menu = builder.build();

@@ -17,6 +17,9 @@ bad-sender: "&cThis command can only be used by a player!"
 #This message will be sent if player don't have any item in hand
 bad-item: "&cYou don't have any item in hand!"
 
+#This message will be sent if command is incorrect
+bad-command: "&cCommand is incorrect!"
+
 #This message will be sent if item was successfully added to reward
 successfully-add-item: "&aSuccessfully added item to reward!"
 

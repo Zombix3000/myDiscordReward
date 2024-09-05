@@ -12,10 +12,10 @@ import java.util.List;
 
 public class AddRewardCommandCommand implements CommandExecutor {
     private final ConfigManager configManager;
-    private final String noPermission;
-    private final String successfullyAdd;
-    private final String badItem;
-    private final String badSender;
+    private String noPermission;
+    private String successfullyAdd;
+    private String badCommand;
+    private String badSender;
 
     public AddRewardCommandCommand(ConfigManager configManager) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
@@ -23,7 +23,7 @@ public class AddRewardCommandCommand implements CommandExecutor {
         this.configManager = configManager;
         this.noPermission = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("no-permission"));
         this.successfullyAdd = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("successfully-add-command"));
-        this.badItem = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("bad-item"));
+        this.badCommand = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("bad-command"));
         this.badSender = ChatColor.translateAlternateColorCodes('&', messagesConfig.getString("bad-sender"));
     }
 
@@ -32,22 +32,26 @@ public class AddRewardCommandCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (player.hasPermission("mydiscordreward.addrewardcommand")) {
+            if (player.hasPermission("mydiscordreward.admin")) {
                 String[] remainingArgs = new String[args.length - 1];
                 System.arraycopy(args, 1, remainingArgs, 0, args.length - 1);
 
                 String rewardCommand = String.join(" ", remainingArgs).replace("/", "");
-                FileConfiguration mainConfig = configManager.getMainConfig();
+                if (!rewardCommand.isEmpty()) {
+                    FileConfiguration mainConfig = configManager.getMainConfig();
 
-                List<String> rewardCommands = mainConfig.getStringList("reward.commands");
+                    List<String> rewardCommands = mainConfig.getStringList("reward.commands");
 
-                rewardCommands.add(rewardCommand);
+                    rewardCommands.add(rewardCommand);
 
-                mainConfig.set("reward.commands", rewardCommands);
+                    mainConfig.set("reward.commands", rewardCommands);
 
-                configManager.saveMainConfig();
+                    configManager.saveMainConfig();
 
-                player.sendMessage(successfullyAdd.replace("{player}", player.getName()));
+                    player.sendMessage(successfullyAdd.replace("{player}", player.getName()));
+                } else {
+                    player.sendMessage(badCommand.replace("{player}", player.getName()));
+                }
             } else {
                 player.sendMessage(noPermission.replace("{player}", player.getName()));
             }

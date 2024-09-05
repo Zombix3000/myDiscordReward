@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class UpdateCommand implements CommandExecutor {
     private final JavaPlugin plugin;
-    private final String noPermission;
+    private String noPermission;
 
     public UpdateCommand(ConfigManager configManager, JavaPlugin plugin) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
@@ -22,7 +22,7 @@ public class UpdateCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.hasPermission("mydiscordreward.update")) {
+        if (sender.hasPermission("mydiscordreward.admin")) {
             checkForUpdates(sender);
         } else {
             sender.sendMessage(noPermission.replace("{player}", sender.getName()));

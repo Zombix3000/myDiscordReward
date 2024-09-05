@@ -15,8 +15,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import javax.security.auth.login.LoginException;
 
-import static org.bukkit.Bukkit.getLogger;
-
 public class Bot extends ListenerAdapter {
     private static JDA jda;
     private static ConfigManager configManager;
@@ -60,6 +58,9 @@ public class Bot extends ListenerAdapter {
         FileConfiguration discordConfig = configManager.getDiscordConfig();
         Activity activity;
         String activityType = discordConfig.getString("bot.activity.type");
+        if (activityType == null) {
+            activityType = "";
+        }
         String activityMessage = "Nothing";
 
         if (discordConfig.getString("bot.activity.message") != null) {

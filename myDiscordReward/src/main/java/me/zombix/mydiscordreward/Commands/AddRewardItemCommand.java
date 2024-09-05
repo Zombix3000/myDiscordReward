@@ -13,10 +13,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class AddRewardItemCommand implements CommandExecutor {
     private final ConfigManager configManager;
-    private final String noPermission;
-    private final String successfullyAdd;
-    private final String badItem;
-    private final String badSender;
+    private String noPermission;
+    private String successfullyAdd;
+    private String badItem;
+    private String badSender;
 
     public AddRewardItemCommand(ConfigManager configManager) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
@@ -33,7 +33,7 @@ public class AddRewardItemCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (player.hasPermission("mydiscordreward.addrewarditem")) {
+            if (player.hasPermission("mydiscordreward.admin")) {
                 ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
                 if (itemInHand != null && !itemInHand.getType().equals(Material.AIR)) {

@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MyDiscordRewardCommand implements CommandExecutor {
     private final ConfigManager configManager;
     private final JavaPlugin plugin;
-    private final String noPermission;
+    private String noPermission;
 
     public MyDiscordRewardCommand(ConfigManager configManager, JavaPlugin plugin) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();

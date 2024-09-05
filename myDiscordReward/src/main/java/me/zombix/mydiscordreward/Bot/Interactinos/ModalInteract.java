@@ -19,6 +19,7 @@ public class ModalInteract extends ListenerAdapter {
     private String getReward;
     private String mustBeOnline;
     private String alreadyGetReward;
+    private String noPermission;
 
     public ModalInteract(ConfigManager configManager) {
         FileConfiguration messagesConfig = configManager.getMessagesConfig();
@@ -27,6 +28,7 @@ public class ModalInteract extends ListenerAdapter {
         this.getReward = messagesConfig.getString("successfully-get-reward");
         this.mustBeOnline = messagesConfig.getString("must-be-online");
         this.alreadyGetReward = messagesConfig.getString("already-get-reward");
+        this.noPermission = messagesConfig.getString("no-permission");
     }
 
     @Override
@@ -154,20 +156,24 @@ public class ModalInteract extends ListenerAdapter {
                 Player player = Bukkit.getPlayerExact(nick);
 
                 if (player != null) {
-                    GiveReward.giveReward(nick);
+                    if (player.hasPermission("mydiscordreward.getreward")) {
+                        GiveReward.giveReward(nick);
 
-                    FileConfiguration usersConfig = configManager.getUsersConfig();
+                        FileConfiguration usersConfig = configManager.getUsersConfig();
 
-                    List<String> usersList = usersConfig.getStringList("users");
+                        List<String> usersList = usersConfig.getStringList("users");
 
-                    usersList.add(nick);
-                    usersList.add(event.getUser().getName());
+                        usersList.add(nick);
+                        usersList.add(event.getUser().getName());
 
-                    usersConfig.set("users", usersList);
+                        usersConfig.set("users", usersList);
 
-                    configManager.saveUsersConfig();
+                        configManager.saveUsersConfig();
 
-                    event.reply(getReward).setEphemeral(true).queue();
+                        event.reply(getReward).setEphemeral(true).queue();
+                    } else {
+                        event.reply(noPermission).setEphemeral(true).queue();
+                    }
                 } else {
                     event.reply(mustBeOnline).setEphemeral(true).queue();
                 }

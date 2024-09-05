@@ -11,9 +11,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ButtonInteract extends ListenerAdapter {
     private ConfigManager configManager;
-    private final String title;
-    private final String label;
-    private final String placeholder;
+    private String title;
+    private String label;
+    private String placeholder;
 
     public ButtonInteract(ConfigManager configManager) {
         FileConfiguration discordConfig = configManager.getDiscordConfig();

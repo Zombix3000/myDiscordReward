@@ -1,5 +1,7 @@
 package me.zombix.mydiscordreward;
 
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
 import me.zombix.mydiscordreward.Bot.Bot;
 import me.zombix.mydiscordreward.Commands.MyDiscordRewardCommand;
 import me.zombix.mydiscordreward.Config.CommandsTabCompleter;
@@ -7,18 +9,22 @@ import me.zombix.mydiscordreward.Config.ConfigManager;
 import me.zombix.mydiscordreward.Config.Updates;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.util.Objects;
 import java.util.logging.Logger;
 
-public final class MyDiscordReward extends JavaPlugin {
+public final class MyDiscordReward extends JavaPlugin /*implements PluginMessageListener*/ {
     private static ConfigManager configManager;
 
     @Override
     public void onEnable() {
         configManager = new ConfigManager(this);
         configManager.setupConfig();
+
+        //getServer().getMessenger().registerIncomingPluginChannel(this, "mydiscordreward:messages", this);
 
         registerCommands();
         runBot();
@@ -37,6 +43,21 @@ public final class MyDiscordReward extends JavaPlugin {
         getLogger().info("Plugin myDiscordReward has been disabled!");
     }
 
+    /*@Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals("mydiscordreward:messages")) {
+            return;
+        }
+
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String subchannel = in.readUTF();
+
+        if (subchannel.equals("Message")) {
+            String text = in.readUTF();
+            getServer().getLogger().info("Message from BungeeCord: " + text);
+        }
+    }*/
+
     private void registerCommands() {
         CommandExecutor myDiscordRewardCommand = new MyDiscordRewardCommand(configManager, this);
         TabCompleter commandsTabCompleter = new CommandsTabCompleter();
@@ -53,10 +74,16 @@ public final class MyDiscordReward extends JavaPlugin {
             try {
                 new Bot(token, configManager);
             } catch (Exception e) {
-                logger.severe("There was en error while enabling bot! Please check is token correct.");
+                if (e.toString().contains("The provided token is invalid!")) {
+                    logger.severe("There was en error while enabling bot! Please check is token correct.");
+                } else {
+                    logger.severe(e.toString());
+                }
+                configManager.getPlugin().getServer().getPluginManager().disablePlugin(configManager.getPlugin());
             }
         } else {
             logger.severe("There was en error while enabling bot! Please sing the bot token in config.yml.");
+            configManager.getPlugin().getServer().getPluginManager().disablePlugin(configManager.getPlugin());
         }
     }
 

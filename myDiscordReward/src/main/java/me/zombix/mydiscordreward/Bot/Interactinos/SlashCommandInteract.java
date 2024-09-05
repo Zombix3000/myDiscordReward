@@ -84,19 +84,27 @@ public class SlashCommandInteract extends ListenerAdapter {
                 embed.setColor(color);
             }
             if (embedAuthorText != null) {
-                try {
-                    embed.setAuthor(embedAuthorText, null, embedAuthorLink);
-                } catch (Exception e) {
+                if (embedAuthorLink != null) {
+                    try {
+                        embed.setAuthor(embedAuthorText, null, embedAuthorLink);
+                    } catch (Exception e) {
+                        embed.setAuthor(embedAuthorText, null, null);
+                        getLogger().severe("The link of icon in author is incorrect.");
+                    }
+                } else {
                     embed.setAuthor(embedAuthorText, null, null);
-                    getLogger().severe("The link of icon in author is incorrect.");
                 }
             }
             if (embedFooterText != null) {
-                try {
-                    embed.setFooter(embedFooterText, embedFooterLink);
-                } catch (Exception e) {
+                if (embedFooterLink != null) {
+                    try {
+                        embed.setFooter(embedFooterText, embedFooterLink);
+                    } catch (Exception e) {
+                        embed.setFooter(embedFooterText, null);
+                        getLogger().severe("The link of icon in footer is incorrect.");
+                    }
+                } else {
                     embed.setFooter(embedFooterText, null);
-                    getLogger().severe("The link of icon in footer is incorrect.");
                 }
             }
 
