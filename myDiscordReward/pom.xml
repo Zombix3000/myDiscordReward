@@ -6,7 +6,7 @@
 
     <groupId>me.zombix</groupId>
     <artifactId>myDiscordReward</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>myDiscordReward</name>
@@ -40,15 +40,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <outputDirectory>D:\krzys\spigot/BungeecordAndSpigot/spigot/plugins</outputDirectory>
-                    <!--<outputDirectory>D:\krzys\spigot/server 1.20.6/plugins</outputDirectory>-->
-                </configuration>
             </plugin>
         </plugins>
         <resources>
