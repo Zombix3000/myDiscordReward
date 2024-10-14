@@ -8,8 +8,14 @@
 #Plugin should checking for new updates
 check-for-updates: true
 
+#Using myDiscordRewardProxy on BungeeCord or Velocity server (it switch automatically)
+proxy-enabled: false
+server-name: ""
+
+#Bot token here
 bot-token: "nope"
 
+#Rewards
 reward:
   commands:
   items:

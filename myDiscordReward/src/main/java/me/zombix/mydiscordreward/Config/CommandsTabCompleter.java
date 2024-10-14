@@ -19,17 +19,11 @@ public class CommandsTabCompleter implements TabCompleter {
             List<String> subCommands = new ArrayList<>();
 
             if (command.getName().toLowerCase().equals("mydiscordreward")) {
-                if (sender.hasPermission("mydiscordreward.reload")) {
-                    subCommands.add("reload");
-                }
-                if (sender.hasPermission("mydiscordreward.update")) {
-                    subCommands.add("update");
-                }
-                if (sender.hasPermission("mydiscordreward.addrewarditem")) {
-                    subCommands.add("addrewarditem");
-                }
-                if (sender.hasPermission("mydiscordreward.addrewardcommand")) {
+                if (sender.hasPermission("mydiscordreward.admin")) {
                     subCommands.add("addrewardcommand");
+                    subCommands.add("addrewarditem");
+                    subCommands.add("reload");
+                    subCommands.add("update");
                 }
             }
 
@@ -40,9 +34,6 @@ public class CommandsTabCompleter implements TabCompleter {
             }
         }
 
-        completions.replaceAll(completion -> completion.replaceFirst("^mydiscordreward:", ""));
-
-        completions.sort(String.CASE_INSENSITIVE_ORDER);
         return completions;
     }
 

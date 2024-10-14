@@ -2,7 +2,6 @@ package me.zombix.mydiscordreward.Commands;
 
 import me.zombix.mydiscordreward.Bot.Bot;
 import me.zombix.mydiscordreward.Config.ConfigManager;
-import me.zombix.mydiscordreward.MyDiscordReward;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,6 +27,8 @@ public class ReloadCommand implements CommandExecutor {
             configManager.setupConfig();
             Bot.shutdown();
             MyDiscordReward.runBot();
+            MyDiscordReward.unloadChannels();
+            MyDiscordReward.loadChannels();
 
             sender.sendMessage(successfullyReloaded);
         } else {

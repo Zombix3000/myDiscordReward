@@ -1,0 +1,15 @@
+me\zombix\mydiscordreward\Bot\Interactinos\StringSelectInteract.class
+me\zombix\mydiscordreward\Commands\AddRewardCommandCommand.class
+me\zombix\mydiscordreward\MyDiscordReward.class
+me\zombix\mydiscordreward\Config\Updates.class
+me\zombix\mydiscordreward\Bot\Interactinos\ModalInteract.class
+me\zombix\mydiscordreward\Commands\ReloadCommand.class
+me\zombix\mydiscordreward\Bot\Bot.class
+me\zombix\mydiscordreward\Bot\Interactinos\SlashCommandInteract.class
+me\zombix\mydiscordreward\Commands\AddRewardItemCommand.class
+me\zombix\mydiscordreward\Commands\MyDiscordRewardCommand.class
+me\zombix\mydiscordreward\Config\ConfigManager.class
+me\zombix\mydiscordreward\Bot\Interactinos\ButtonInteract.class
+me\zombix\mydiscordreward\Commands\UpdateCommand.class
+me\zombix\mydiscordreward\Actions\GiveReward.class
+me\zombix\mydiscordreward\Config\CommandsTabCompleter.class

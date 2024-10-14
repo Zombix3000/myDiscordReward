@@ -152,10 +152,10 @@ public class ModalInteract extends ListenerAdapter {
         } else if (event.getModalId().equals("nickModal")) {
             String nick = event.getValue("nick").getAsString();
 
-            if (configManager.canGetReward(nick, event.getUser().getName())) {
+            if (configManager.canGetReward(nick, event.getUser().getId())) {
                 Player player = Bukkit.getPlayerExact(nick);
 
-                if (player != null) {
+                if (player != null && player.isOnline()) {
                     if (player.hasPermission("mydiscordreward.getreward")) {
                         GiveReward.giveReward(nick);
 
@@ -164,7 +164,7 @@ public class ModalInteract extends ListenerAdapter {
                         List<String> usersList = usersConfig.getStringList("users");
 
                         usersList.add(nick);
-                        usersList.add(event.getUser().getName());
+                        usersList.add(event.getUser().getId());
 
                         usersConfig.set("users", usersList);
 

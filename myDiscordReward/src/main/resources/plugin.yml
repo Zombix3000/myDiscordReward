@@ -8,11 +8,7 @@ commands:
   mydiscordreward:
     description: myDiscordReward plugin command
     usage: /mydiscordreward <reload/update/addrewarditem/addrewardcommand> (command)
-    aliases:
-      - reload
-      - update
-      - addrewarditem
-      - addrewardcommand
+    aliases: [mdcr]
 
 permissions:
   mydiscordreward.mydiscordreward:
@@ -24,12 +20,3 @@ permissions:
   mydiscordreward.admin:
     description: Allow to use /mydiscordreward <reload/update/addrewarditem/addrewardcommand>
     default: op
-  #mydiscordreward.update:
-  #  description: Allow to use /mydiscordreward update command
-  #  default: op
-  #mydiscordreward.addrewarditem:
-  #  description: Allow to use /mydiscordreward addrewarditem command
-  #  default: op
-  #mydiscordreward.addrewardcommand:
-  #  description: Allow to use /mydiscordreward addrewardcommand (command) command
-  #  default: op
