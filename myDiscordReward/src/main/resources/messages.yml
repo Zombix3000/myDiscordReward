@@ -1,0 +1,54 @@
+#########################################
+# --- myDiscordReward v2.0.0 Plugin --- #
+#########################################
+
+#This is a messages for myDiscordReward plugin!
+#More info you can find in plugin documentation or in our discord: https://discord.gg/qTpgQXQZye
+
+#Color codes: &
+#Variables:
+#{player} - Usage in all without "bad-sender" but not reccomended for most only: "bad-item", "successfully-add-item", "no-permission-minecraft"
+#{user} - Usage in "check-user"
+#{uses} - Usage in "check-user"
+#{provided-user} - Usage in "check-user" and "bad-user"
+
+#MINECRAFT MESSAGES
+
+#This message will be sent if player run command but doesn't have permission to do this
+no-permission-minecraft: "&cYou don't have permission to do that!"
+
+#This message will be sent if command sender is not a player
+bad-sender: "&cThis command can only be used by a player!"
+
+#This message will be sent if player don't have any item in hand
+bad-item: "&cYou don't have any item in hand!"
+
+#This message will be sent if command is incorrect
+bad-command: "&cCommand is incorrect!"
+
+#This message will be sent if item was successfully added to reward
+successfully-add-item: "&aSuccessfully added item to reward!"
+
+#This message will be sent if command was successfully added to reward
+successfully-add-command: "&aSuccessfully added command to reward!"
+
+#This message will be sent if player use check command and find information
+check-user: "&7User &c{user} &7was get reward &e{uses} &7times."
+
+#This message will be sent if player use check command and don't find information
+bad-user: "&cCannot find information about this user (probably don't get reward yet)!"
+
+
+#DISCORD MESSAGES
+
+#This message will be sent if player run command but doesn't have permission to do this
+no-permission-discord: "You don't have permission to do that!"
+
+#This message will be sent if player was successfully get reward
+successfully-get-reward: "Successfully get reward from discord!"
+
+#This message will be sent if player is not online and try to get reward
+must-be-online: "You must be online to get your reward!"
+
+#This message will be sent if player try to get reward but already get
+already-get-reward: "You already get your reward!"

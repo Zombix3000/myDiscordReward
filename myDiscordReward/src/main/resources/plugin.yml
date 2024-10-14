@@ -1,0 +1,22 @@
+name: myDiscordReward
+version: '${project.version}'
+main: me.zombix.myDiscordReward.MyDiscordReward
+api-version: '1.16'
+authors: [ Zombix3000 ]
+description: Reward players for joining your Discord with just one click!
+commands:
+  mydiscordreward:
+    description: myDiscordReward plugin command
+    usage: /mydiscordreward <addrewarditem/addrewardcommand/check/reload/update>
+    aliases: [mydcr]
+
+permissions:
+  mydiscordreward.getreward:
+    description: Allow to get reward
+    default: true
+  mydiscordreward.check:
+    description: Allow to use /mydiscordreward <check>
+    default: op
+  mydiscordreward.admin:
+    description: Allow to do anything in plugin
+    default: op

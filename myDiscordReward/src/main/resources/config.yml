@@ -1,0 +1,39 @@
+#########################################
+# --- myDiscordReward v2.0.0 Plugin --- #
+#########################################
+
+#This is a config for myDiscordReward plugin!
+#More info you can find in plugin documentation or in our discord: https://discord.gg/qTpgQXQZye
+
+#Plugin checking for new updates
+check-for-updates: true
+
+#Plugin automatically download and install a new version of plugin
+auto-update: true
+
+#Bot token here
+bot-token: ""
+
+#Rewards (commands support {player} variable and & color codes)
+reward: {}
+
+#Users options and data
+#Block discord id and minecraft uuid of player that already get reward
+block-discord: true
+block-minecraft: true
+
+#Maximum number of reward that can be received by one user (Minecraft and Discord)
+max-usage: 1
+
+#Users list
+discord-list: {}
+minecraft-list: {}
+
+#Discord configuration (don't touch)
+embed: {}
+
+button: {}
+
+modal: {}
+
+bot: {}
