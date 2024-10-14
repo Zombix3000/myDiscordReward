@@ -1,2 +1,2 @@
 # myDiscordReward
-myDiscordReward plugin for spigot servers
+Reward players for joining your Discord with just one click!
