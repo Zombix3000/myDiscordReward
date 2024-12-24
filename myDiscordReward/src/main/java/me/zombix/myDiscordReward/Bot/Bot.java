@@ -8,9 +8,11 @@ import me.zombix.myDiscordReward.Managers.ConfigManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.Command;
+import net.dv8tion.jda.api.interactions.commands.DefaultMemberPermissions;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -38,8 +40,10 @@ public class Bot extends ListenerAdapter {
                 Commands.slash("setup-reward", "Setup reward...").addOptions(
                         new OptionData(OptionType.STRING, "element", "Select element what you want to configure", true)
                                 .addChoices(getSetupChoices())
-                ),
+                )
+                        .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR)),
                 Commands.slash("send-reward-message", "Send reward message (contains: embed, button)")
+                        .setDefaultPermissions(DefaultMemberPermissions.enabledFor(Permission.ADMINISTRATOR))
         ).queue();
     }
 
