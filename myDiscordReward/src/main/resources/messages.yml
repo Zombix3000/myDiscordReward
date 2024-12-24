@@ -14,7 +14,7 @@
 
 #MINECRAFT MESSAGES
 
-#This message will be sent if player run command but doesn't have permission to do this
+#This message will be sent if player do something but doesn't have permission to do this
 no-permission-minecraft: "&cYou don't have permission to do that!"
 
 #This message will be sent if command sender is not a player

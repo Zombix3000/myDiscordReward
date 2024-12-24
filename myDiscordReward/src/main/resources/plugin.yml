@@ -7,7 +7,7 @@ description: Reward players for joining your Discord with just one click!
 commands:
   mydiscordreward:
     description: myDiscordReward plugin command
-    usage: /mydiscordreward <addrewarditem/addrewardcommand/check/reload/update>
+    usage: /mydiscordreward <check/addrewarditem/addrewardcommand/reload/update>
     aliases: [mydcr]
 
 permissions:
